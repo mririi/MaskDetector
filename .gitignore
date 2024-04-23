@@ -24,5 +24,3 @@ env/
 
 # Secret configuration (not for version control)
 .env
-# OR
-config.py
