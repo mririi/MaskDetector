@@ -50,6 +50,8 @@ jobs:
         run: |
           gcloud container clusters get-credentials mask-detector-cluster --zone europe-west1-b --project new-new-419022
           kubectl apply -f kubernetes/deployment.yaml
+          kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\t"}{.spec.containers[*].image}{"\n"}{end}'
+
 
       - name: Verify deployment
         run: |
