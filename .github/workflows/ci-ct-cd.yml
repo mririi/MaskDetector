@@ -43,8 +43,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t gcr.io/new-new-419022/mask-detector-app:v1 .
-          docker push gcr.io/new-new-419022/mask-detector-app:v1
+          docker build -t gcr.io/new-new-419022/mask-detector-app .
+          docker push gcr.io/new-new-419022/mask-detector-app
 
       - name: Deploy to GKE
         run: |
@@ -52,4 +52,7 @@ jobs:
           kubectl apply -f kubernetes/deployment.yaml
 
       - name: Verify deployment
-        run: kubectl get pods
+        run: |
+          kubectl get services 
+          kubectl get pods
+        
