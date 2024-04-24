@@ -191,7 +191,7 @@ spec:
     spec:
       containers:
       - name: mask-detector-app
-        image: gcr.io/new-new-419022/mask-detector-app
+        image: gcr.io/new-new-419022/mask-detector-app:v2
         ports:
         - containerPort: 8081
 ---
