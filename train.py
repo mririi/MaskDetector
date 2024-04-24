@@ -39,7 +39,7 @@ model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
 
 # Part 2 - Fitting the CNN to the images
 
-from keras.src.legacy.preprocessing.image import ImageDataGenerator
+from keras_preprocessing.image import ImageDataGenerator
 
 train_datagen = ImageDataGenerator(rescale = 1./255,
                                    shear_range = 0.2,
