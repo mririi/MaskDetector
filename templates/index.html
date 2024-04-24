@@ -45,10 +45,10 @@
       .res-part {
         border: 1px solid #dedede;
         margin-left: 20px;
-        height: 310px;
         width: 100%;
         padding: 5px;
         margin: 0px auto;
+        text-align: center;
         overflow: auto;
       }
       .res-part2 {
@@ -162,7 +162,6 @@
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
           rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
       }
-      .footer{position:absolute;bottom:0px;width:100%;}
 		#datafetch_form{padding:0px 40px;}
 		.result-box p{text-align:left;}
 		.abc{
@@ -232,8 +231,7 @@
           <div class="col-md-6 col-xs-12 right-part">
             <h5 class="mb-2"><center>Prediction Results</center></h5>
             <div class="row">
-              <div class="res-part2 col-md-5 col-xs-12"></div>
-              <div class="res-part col-md-5 col-xs-12">
+              <div class="res-part col-md-10 col-xs-12">
                 <div class="jsonRes"></div>
               </div>
             </div>
@@ -241,16 +239,6 @@
         </div>
       </section>
     </div>
-
-    <footer class="footer">
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-lg-6 h-100 text-center my-auto mx-auto">
-					<p class="text-muted small mb-2 mb-lg-0">&copy; paras 2022. All Rights Reserved.</p>
-				</div>
-			</div>
-		</div>
-	</footer>
 
     <div id="loading"><div class="loader"></div></div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -313,9 +301,16 @@
                     }
                   }
                 } catch (e) {}
-                $(".res-part").html(
-                  "<pre>" + JSON.stringify(res[0], undefined, 2) + "</pre>"
-                );
+                var r = JSON.parse(JSON.stringify(res[0], undefined, 2)).image
+                if(r == "without_mask"){
+                  $(".res-part").html(
+                    "<h3 style='color:red;'>Without Mask</h3>"
+                  )
+                }else if (r == "with_mask"){
+                    $(".res-part").html(
+                      "<h3 style='color:green;'>With Mask</h3>"
+                    );
+                  }
                 $("#loading").hide();
               },
             });

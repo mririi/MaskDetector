@@ -3,7 +3,6 @@ __pycache__/
 *.pyc
 *.pyo
 
-dataset/
 # Generated test coverage reports
 htmlcov/
 .coverage
