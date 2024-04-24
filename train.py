@@ -63,8 +63,8 @@ model_saved=model.fit(
         validation_data=test_set
         )
 
-model.save('mymodel.h5',model_saved)
-print("Saved model to disk")
+model.save('maskDetectionModel.h5',model_saved)
+print("Saved model")
 
 # Assuming test_set is your test data
 evaluation = model.evaluate(test_set)
