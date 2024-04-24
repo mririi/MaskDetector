@@ -33,7 +33,7 @@ jobs:
           export_default_credentials: true
 
       - name: Install gke-gcloud-auth-plugin
-        run:   gcloud components install gke-gcloud-auth-plugin
+        run: gcloud components install gke-gcloud-auth-plugin
 
       - name: Authenticate Docker with GCR
         run: gcloud auth configure-docker gcr.io
@@ -46,7 +46,8 @@ jobs:
       - name: Deploy to GKE
         run: |
           gcloud container clusters get-credentials mask-detector-cluster --zone europe-west1-b --project new-new-419022
-          kubectl apply -f kubernetes/deployment.yaml
+          kubectl create deployment mask-detector-app --image=gcr.io/new-new-419022/mask-detector-app:latest
+          kubectl expose deployment musk-detector-app --type=LoadBalancer --port 80 --target-port 8081
       
       - name: Verify deployment
         run: kubectl get pods
