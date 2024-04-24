@@ -24,3 +24,5 @@ env/
 
 # Secret configuration (not for version control)
 .env
+
+.pytest_cache/
