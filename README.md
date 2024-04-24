@@ -80,9 +80,9 @@ Expose the app
 ```
 kubectl expose deployment mask-detector-app --type=LoadBalancer --port 80 --target-port 8081
 ```
-## CI/CD Pipline
+## CI/CT/CD Pipline
 ### Description
-Create a continous integration and continous deployment pipline and make it run on every push
+Create a continous integration, training and deployment pipline and make it run on every push
 
 ### Do it yourself
 Create .github/workflows directory
@@ -92,7 +92,7 @@ cd .github/workflows
 ```
 Create a file name it what you want and make sure its .yaml and put the code inside the file ci-cd.yaml in it
 ```
-name: CI/CD Pipeline
+name: Continuous Integration/Training/Deployment Pipeline
 
 on:
   push:
@@ -118,6 +118,9 @@ jobs:
           
       - name: Run tests
         run: pytest
+
+      - name: Train model
+        run: python train.py
 
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.0

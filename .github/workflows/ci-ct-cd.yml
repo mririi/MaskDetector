@@ -28,9 +28,6 @@ jobs:
       - name: Train model
         run: python train.py
 
-      - name: evaluate results
-        run: python evaluate.py
-
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.0
         with:
