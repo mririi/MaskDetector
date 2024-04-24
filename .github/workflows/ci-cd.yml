@@ -46,7 +46,7 @@ jobs:
       - name: Deploy to GKE
         run: |
           gcloud container clusters get-credentials mask-detector-cluster --zone europe-west1-b --project new-new-419022
-          gcloud container clusters update mask-detector-cluster --num-nodes=2
-      
+          kubectl apply -f kubernetes/deployment.yaml
+
       - name: Verify deployment
         run: kubectl get pods
