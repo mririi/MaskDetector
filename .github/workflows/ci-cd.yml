@@ -40,8 +40,8 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t gcr.io/new-new-419022/mask-detector-app:latest .
-          docker push gcr.io/new-new-419022/mask-detector-app:latest
+          docker build -t gcr.io/new-new-419022/mask-detector-app:v1 .
+          docker push gcr.io/new-new-419022/mask-detector-app:v1
 
       - name: Deploy to GKE
         run: |
