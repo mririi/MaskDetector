@@ -11,7 +11,7 @@ class maskdetection:
     def predictionmask(self):
         try:
             #load model
-            model = load_model('mymodel.h5')
+            model = load_model('maskDetectionModel.h5')
 
             imagename = self.filename
             test_image = image.load_img(imagename, target_size = (150,150))

@@ -61,7 +61,7 @@ gcloud auth configure-docker
 ```
 Push the docker image
 ```
-docker push gcr.io/${PROJECT_ID}/mask-detector-app:v1 .
+docker push gcr.io/${PROJECT_ID}/mask-detector-app:v1
 ```
 Set your project ID and Compute Engine zone options for the gcloud tool
 ```
