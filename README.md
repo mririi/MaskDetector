@@ -103,7 +103,7 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Clone the repository
         uses: actions/checkout@v2
 
       - name: Set up Python
@@ -135,10 +135,33 @@ jobs:
       - name: Authenticate Docker with GCR
         run: gcloud auth configure-docker gcr.io
 
+      - name: Get current version from deployment.yaml
+        id: get_version
+        run: echo ::set-output name=version::$(grep 'image:' kubernetes/deployment.yaml | awk -F':' '{print $3}')
+
+      - name: Increment version
+        id: increment_version
+        run: |
+          # Extract version components
+          MAJOR=$(echo "${{ steps.get_version.outputs.version }}" | cut -d. -f1)
+          MINOR=$(echo "${{ steps.get_version.outputs.version }}" | cut -d. -f2)
+          PATCH=$(echo "${{ steps.get_version.outputs.version }}" | cut -d. -f3)
+
+          # Increment PATCH version
+          PATCH=$((PATCH+1))
+
+          # Set new version
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "::set-output name=new_version::$NEW_VERSION"
+
+      - name: Update deployment.yaml with new version
+        run: |
+          sed -i "s/image: gcr.io\/new-new-419022\/mask-detector-app:${{ steps.get_version.outputs.version }}/image: gcr.io\/new-new-419022\/mask-detector-app:${{ steps.increment_version.outputs.new_version }}/" kubernetes/deployment.yaml
+
       - name: Build and push Docker image
         run: |
-          docker build -t gcr.io/new-new-419022/mask-detector-app:v1 .
-          docker push gcr.io/new-new-419022/mask-detector-app:v1
+          docker build -t gcr.io/new-new-419022/mask-detector-app:${{ steps.increment_version.outputs.new_version }} .
+          docker push gcr.io/new-new-419022/mask-detector-app:${{ steps.increment_version.outputs.new_version }}
 
       - name: Deploy to GKE
         run: |
@@ -146,7 +169,10 @@ jobs:
           kubectl apply -f kubernetes/deployment.yaml
 
       - name: Verify deployment
-        run: kubectl get pods
+        run: |
+          kubectl get services 
+          kubectl get pods
+          kubectl rollout status deployment/mask-detector-app
 ```
 Now get back to the main directory and create tests directory
 ```
