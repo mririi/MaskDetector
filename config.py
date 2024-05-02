@@ -1,8 +1,8 @@
 from os import environ as env
 import multiprocessing
 
-PORT = int(8081)
-DEBUG_MODE = int(1)
+PORT = 8081
+DEBUG_MODE = 1
 
 # Gunicorn config
 bind = ":" + str(PORT)
