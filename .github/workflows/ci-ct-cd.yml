@@ -19,8 +19,8 @@ jobs:
 
       - name: Create auth_bucket.json
         run: |
-          echo '${{ secrets.GCP_BUCKET }}'' > auth_bucket.json
-          
+          echo '${{ secrets.GCP_BUCKET }}' > auth_bucket.json
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
