@@ -27,7 +27,7 @@ jobs:
 
       - name: Create auth_bucket.json
         run: |
-          echo ${{ secrets.GCP_BUCKET }} > auth_bucket.json
+          echo -n ${{ secrets.GCP_BUCKET }} > auth_bucket.json
 
       - name: Train model
         run: python train.py
