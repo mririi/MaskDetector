@@ -3,6 +3,7 @@ import tensorflow as tf
 from tensorflow import keras
 from keras.models import load_model
 from keras_preprocessing import image
+from utils.utils import getModel
 
 class maskdetection:
     def __init__(self, filename):
@@ -10,6 +11,8 @@ class maskdetection:
 
     def predictionmask(self):
         try:
+            #download model
+            getModel()
             #load model
             model = load_model('maskDetectionModel.h5')
 
@@ -28,4 +31,3 @@ class maskdetection:
 
         except Exception as ex:
             raise ex
-

@@ -25,3 +25,9 @@ env/
 .env
 
 .pytest_cache/
+
+dataset/
+*.h5
+inputImage.jpg
+maskDetectionModel.h5
+*.zip

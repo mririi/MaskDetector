@@ -25,6 +25,10 @@ jobs:
       - name: Run tests
         run: pytest
 
+      - name: Create auth_bucket.json
+        run: |
+          echo ${{ secrets.GCP_BUCKET }} > auth_bucket.json
+
       - name: Train model
         run: python train.py
 
@@ -75,9 +79,4 @@ jobs:
           kubectl apply -f kubernetes/deployment.yaml
 
       - name: Verify deployment
-        run: |
-          kubectl get services 
-          kubectl get pods
-          kubectl rollout status deployment/mask-detector-app
-
-        
+        run: kubectl get all

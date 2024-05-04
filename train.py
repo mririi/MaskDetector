@@ -4,6 +4,7 @@ from keras.layers import Conv2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+from utils.utils import saveModel, getDataSet
 
 # Initialising the CNN
 model = Sequential()
@@ -47,6 +48,9 @@ train_datagen = ImageDataGenerator(rescale = 1./255,
                                    horizontal_flip = True)
 test_datagen = ImageDataGenerator(rescale = 1./255)
 
+# download dataset
+getDataSet()
+
 training_set = train_datagen.flow_from_directory('dataset/train',
                                                  target_size = (150, 150),
                                                  batch_size = 16,
@@ -64,6 +68,7 @@ model_saved=model.fit(
         )
 
 model.save('maskDetectionModel.h5',model_saved)
+saveModel()
 print("Saved model")
 
 # Assuming test_set is your test data
