@@ -31,3 +31,4 @@ dataset/
 inputImage.jpg
 maskDetectionModel.h5
 *.zip
+*.json
